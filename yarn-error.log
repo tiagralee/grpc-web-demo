@@ -1,0 +1,63 @@
+Arguments: 
+  /Users/ligu/.nvm/versions/node/v12.14.1/bin/node /Users/ligu/.nvm/versions/node/v12.14.1/bin/yarn install
+
+PATH: 
+  /Users/ligu/.pyenv/shims:/Users/ligu/.nvm/versions/node/v12.14.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/ligu/.pyenv/shims:/Users/ligu/.nvm/versions/node/v12.14.1/bin:/Users/ligu/go/bin:/Users/ligu/go/bin
+
+Yarn version: 
+  1.22.0
+
+Node version: 
+  12.14.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@improbable-eng%2fgrpc-web: tunneling socket could not be established, cause=connect EHOSTUNREACH 0.0.12.56:80 - Local (10.142.224.89:52330)
+      at ClientRequest.onError (/Users/ligu/.nvm/versions/node/v12.14.1/lib/node_modules/yarn/lib/cli.js:152213:17)
+      at Object.onceWrapper (events.js:313:26)
+      at ClientRequest.emit (events.js:223:5)
+      at Socket.socketErrorListener (_http_client.js:406:9)
+      at Socket.emit (events.js:223:5)
+      at emitErrorNT (internal/streams/destroy.js:92:8)
+      at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+      at processTicksAndRejections (internal/process/task_queues.js:81:21)
+
+npm manifest: 
+  {
+    "name": "grpc-web-react-example",
+    "version": "0.12.0",
+    "private": true,
+    "scripts": {
+      "generate_cert": "cd ../misc ./gen_cert.sh",
+      "build:proto": "./protogen.sh",
+      "get_go_deps": "./get_go_deps.sh",
+      "postinstall": "npm run get_go_deps",
+      "webpack-dev:tls": "cd ts && export USE_TLS=true && webpack-dev-server --colors --watch --hot --inline --port 8082 --host 0.0.0.0 --output-public-path=https://localhost:8082/build/ --https --cert=../../../misc/localhost.crt --key=../../../misc/localhost.key",
+      "webpack-dev": "cd ts && webpack-dev-server --colors --watch --hot --inline --port 8081 --host 0.0.0.0 --output-public-path=http://localhost:8081/build/",
+      "start:tls": "npm run build:proto && concurrently --kill-others \"go run go/exampleserver/exampleserver.go --enable_tls=true\" \"npm run webpack-dev:tls\"",
+      "start": "npm run build:proto && concurrently --kill-others \"go run go/exampleserver/exampleserver.go\" \"npm run webpack-dev\""
+    },
+    "license": "none",
+    "dependencies": {
+      "@improbable-eng/grpc-web": "^0.12.0",
+      "google-protobuf": "^3.6.1"
+    },
+    "devDependencies": {
+      "@types/google-protobuf": "^3.2.5",
+      "concurrently": "^4.1.0",
+      "ts-loader": "^6.0.1",
+      "ts-protoc-gen": "0.10.0",
+      "typescript": "3.5.1",
+      "webpack": "^4.17.2",
+      "webpack-cli": "^3.1.0",
+      "webpack-dev-server": "^3.1.7"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
